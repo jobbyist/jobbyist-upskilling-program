@@ -1,0 +1,44 @@
+{
+  "name": "jobbyist-webinar-series",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Jobbyist Webinar Series — Episode 1: South Africa's Digital Labour Market. Premium registration landing page and backend built on Next.js.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "14.2.15",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "framer-motion": "11.11.9",
+    "@supabase/supabase-js": "2.45.4",
+    "resend": "4.0.0",
+    "zod": "3.23.8",
+    "qrcode": "1.5.4",
+    "ics": "3.7.6",
+    "clsx": "2.1.1",
+    "tailwind-merge": "2.5.4",
+    "canvas-confetti": "1.9.3",
+    "nanoid": "5.0.7"
+  },
+  "devDependencies": {
+    "typescript": "5.6.3",
+    "@types/node": "22.7.9",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@types/qrcode": "1.5.5",
+    "@types/canvas-confetti": "1.6.4",
+    "autoprefixer": "10.4.20",
+    "postcss": "8.4.47",
+    "tailwindcss": "3.4.14",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.15"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  }
+}

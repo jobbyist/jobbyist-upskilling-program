@@ -1,0 +1,41 @@
+# Render deployment config for the Jobbyist Webinar Series app.
+# Render doesn't have first-class Next.js cron support like Vercel,
+# so /api/cron/reminders is exposed here as a separate scheduled job
+# hitting the same deployed web service.
+#
+# See: https://render.com/docs/deploy-nextjs-app and
+#      https://render.com/docs/cronjobs
+
+services:
+  - type: web
+    name: jobbyist-webinar
+    runtime: node
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: BUILD_STANDALONE
+        value: "false"
+      # All other variables (Supabase, HubSpot, Resend, Zoom,
+      # analytics, etc.) — set these in the Render dashboard from
+      # .env.example. Never commit real secrets to this file.
+
+  - type: cron
+    name: jobbyist-webinar-reminders
+    runtime: node
+    plan: starter
+    schedule: "*/5 * * * *"
+    buildCommand: npm install
+    startCommand: >
+      node -e "
+      fetch(process.env.CRON_TARGET_URL + '/api/cron/reminders', {
+        headers: { Authorization: 'Bearer ' + process.env.CRON_SECRET }
+      }).then(r => r.text()).then(console.log).catch(e => { console.error(e); process.exit(1); })
+      "
+    envVars:
+      - key: CRON_TARGET_URL
+        sync: false
+      - key: CRON_SECRET
+        sync: false
